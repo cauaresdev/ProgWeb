@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora</title>
+</head>
+<body>
+
+<h2>Calculadora com Visor</h2>
+
+<!-- VISOR -->
+<input type="text" id="visor" readonly>
+<br><br>
+
+<!-- NÚMEROS -->
+<button onclick="adicionar('7')">7</button>
+<button onclick="adicionar('8')">8</button>
+<button onclick="adicionar('9')">9</button>
+<br>
+
+<button onclick="adicionar('4')">4</button>
+<button onclick="adicionar('5')">5</button>
+<button onclick="adicionar('6')">6</button>
+<br>
+
+<button onclick="adicionar('1')">1</button>
+<button onclick="adicionar('2')">2</button>
+<button onclick="adicionar('3')">3</button>
+<br>
+
+<button onclick="adicionar('0')">0</button>
+
+<br><br>
+
+<!-- OPERAÇÕES -->
+<button onclick="adicionar('+')">+</button>
+<button onclick="adicionar('-')">-</button>
+<button onclick="adicionar('*')">*</button>
+<button onclick="adicionar('/')">/</button>
+
+<br><br>
+
+<!-- AÇÕES -->
+<button onclick="calcular()">=</button>
+<button onclick="limpar()">C</button>
+
+<script>
+
+function adicionar(valor) {
+    document.getElementById("visor").value += valor;
+}
+
+function calcular() {
+    let expressao = document.getElementById("visor").value;
+
+    try {
+        let resultado = eval(expressao);
+
+        if (resultado === Infinity) {
+            document.getElementById("visor").value = "Erro (divisão por zero)";
+        } else {
+            document.getElementById("visor").value = resultado;
+        }
+
+    } catch {
+        document.getElementById("visor").value = "Erro";
+    }
+}
+
+function limpar() {
+    document.getElementById("visor").value = "";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<h2>2. Login</h2>
+
+<input type="text" id="usuario" placeholder="Usuário">
+<input type="password" id="senha" placeholder="Senha">
+
+<button onclick="ValidarEntrada()" id="btnLogin">Entrar</button>
+
+<p id="resultadoLogin"></p>
+
+<script>
+ function ValidarEntrada() {
+    const usuario = document.getElementById("usuario").value;
+    const senha = document.getElementById("senha").value;
+    const resultado = document.getElementById("resultadoLogin");
+
+    if (usuario === "" || senha === "") {
+        alert("ERRO: CAMPOS VAZIOS")
+    } else {
+        alert("CADASTRO FEITO!")
+    }
+ }
+</script>

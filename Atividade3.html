@@ -1,0 +1,14 @@
+<h2>3. Contador de Caracteres</h2>
+
+<textarea id="texto" placeholder="Digite uma frase" onkeyup="Contar()"></textarea>
+
+<p>Quantidade de caracteres: <span id="contador">0</span></p>
+
+<script>
+    function Contar(){
+        const texto = document.getElementById("texto").value;
+        const tamanho = document.getElementById("contador");
+        tamanho.textContent = texto.length
+    }
+
+</script>

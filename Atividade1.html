@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 1</title>
+</head>
+<body>
+    <h2>1. Validando Idade</h2>
+
+    <input type="number" id="idade" placeholder="Digite sua idade">
+    <button onclick="VerificarIdade()" id="btnValidarIdade">Verificar</button>
+
+    <p id="resultadoIdade"></p>
+
+<script>
+    function VerificarIdade() {
+        const idade = parseInt(document.getElementById("idade").value)
+
+        if (idade <= 18) {
+            alert("O usuário é menor de idade")
+        } else {
+            alert("O usuário é maior de idade")
+        }
+
+        
+    }
+    console.log("TESTE");
+
+
+</script>
+</body>
+</html>
