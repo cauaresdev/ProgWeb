@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Atividade -  AULA 2 - Vetores</h1>
+    <form>
+        <div>
+        <h2>Insira Seus Dados</h2>
+        Nome:<input type="text" id="nome"></input>
+        Telefone: <input type="text" id="tel"> </input>
+        <button onclick= "incluir()">Inserir</button>
+        <div><button onclick="remover()">Remover</button></div>
+        </div>
+    </form>
+    <script>
+        vetor = new Array();
+        function cadastro(nome,tel) {
+            this.nome = document.getElementById("nome").value;
+            this.tel = document.getElementById("tel").value;
+            
+        }
+
+        function lista() {
+           for (x in vetor) {
+               alert("Nome: " + vetor[x].nome + " - Telefone: " + vetor[x].tel)
+            }
+       }
+
+
+        function incluir() {
+            vetor.push(new cadastro());
+            lista();
+        }
+
+        function remover() {
+            vetor.pop()
+            alert("USUARIOS REMOVIDOS")
+        }
+
+       
+    </script>
+</body>
+</html>
