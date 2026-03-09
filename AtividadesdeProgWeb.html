@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 1</title>
+</head>
+<body>
+    <h2>1. Validando Idade</h2>
+
+    <input type="number" id="idade" placeholder="Digite sua idade">
+    <button onclick="VerificarIdade()" id="btnValidarIdade">Verificar</button>
+
+    <p id="resultadoIdade"></p>
+
+<script>
+    function VerificarIdade() {
+        const idade = parseInt(document.getElementById("idade").value)
+
+        if (idade <= 18) {
+            alert("O usuário é menor de idade")
+        } else {
+            alert("O usuário é maior de idade")
+        }
+
+        
+    }
+    console.log("TESTE");
+
+
+</script>
+</body>
+</html>
+
+<h2>2. Login</h2>
+
+<input type="text" id="usuario" placeholder="Usuário">
+<input type="password" id="senha" placeholder="Senha">
+
+<button onclick="ValidarEntrada()" id="btnLogin">Entrar</button>
+
+<p id="resultadoLogin"></p>
+
+<script>
+ function ValidarEntrada() {
+    const usuario = document.getElementById("usuario").value;
+    const senha = document.getElementById("senha").value;
+    const resultado = document.getElementById("resultadoLogin");
+
+    if (usuario === "" || senha === "") {
+        alert("ERRO: CAMPOS VAZIOS")
+    } else {
+        alert("CADASTRO FEITO!")
+    }
+ }
+</script>
+
+<h2>3. Contador de Caracteres</h2>
+
+<textarea id="texto" placeholder="Digite uma frase" onkeyup="Contar()"></textarea>
+
+<p>Quantidade de caracteres: <span id="contador">0</span></p>
+
+<script>
+    function Contar(){
+        const texto = document.getElementById("texto").value;
+        const tamanho = document.getElementById("contador");
+        tamanho.textContent = texto.length
+    }
+
+</script>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora</title>
+</head>
+<body>
+
+<h2>Calculadora com Visor</h2>
+
+<!-- VISOR -->
+<input type="text" id="visor" readonly>
+<br><br>
+
+<!-- NÚMEROS -->
+<button onclick="adicionar('7')">7</button>
+<button onclick="adicionar('8')">8</button>
+<button onclick="adicionar('9')">9</button>
+<br>
+
+<button onclick="adicionar('4')">4</button>
+<button onclick="adicionar('5')">5</button>
+<button onclick="adicionar('6')">6</button>
+<br>
+
+<button onclick="adicionar('1')">1</button>
+<button onclick="adicionar('2')">2</button>
+<button onclick="adicionar('3')">3</button>
+<br>
+
+<button onclick="adicionar('0')">0</button>
+
+<br><br>
+
+<!-- OPERAÇÕES -->
+<button onclick="adicionar('+')">+</button>
+<button onclick="adicionar('-')">-</button>
+<button onclick="adicionar('*')">*</button>
+<button onclick="adicionar('/')">/</button>
+
+<br><br>
+
+<!-- AÇÕES -->
+<button onclick="calcular()">=</button>
+<button onclick="limpar()">C</button>
+
+<script>
+
+function adicionar(valor) {
+    document.getElementById("visor").value += valor;
+}
+
+function calcular() {
+    let expressao = document.getElementById("visor").value;
+
+    try {
+        let resultado = eval(expressao);
+
+        if (resultado === Infinity) {
+            document.getElementById("visor").value = "Erro (divisão por zero)";
+        } else {
+            document.getElementById("visor").value = resultado;
+        }
+
+    } catch {
+        document.getElementById("visor").value = "Erro";
+    }
+}
+
+function limpar() {
+    document.getElementById("visor").value = "";
+}
+
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Tarefas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    input {
+      padding: 8px;
+      width: 250px;
+    }
+
+    button {
+      padding: 8px 12px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+
+    li {
+      margin-top: 10px;
+    }
+
+    .remover {
+      margin-left: 10px;
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Lista de Tarefas</h2>
+
+  <input type="text" id="tarefaInput" placeholder="Digite uma tarefa">
+  <button onclick="adicionarTarefa()">Adicionar</button>
+
+  <ul id="listaTarefas"></ul>
+
+  <script>
+    function adicionarTarefa() {
+      const input = document.getElementById("tarefaInput");
+      const textoTarefa = input.value.trim();
+
+      if (textoTarefa === "") {
+        alert("Digite uma tarefa!");
+        return;
+      }
+
+      const li = document.createElement("li");
+      li.textContent = textoTarefa;
+
+      const botaoRemover = document.createElement("button");
+      botaoRemover.textContent = "Remover";
+      botaoRemover.className = "remover";
+
+      botaoRemover.onclick = function() {
+        li.remove();
+      };
+
+      li.appendChild(botaoRemover);
+
+      document.getElementById("listaTarefas").appendChild(li);
+
+      input.value = "";
+      input.focus();
+    }
+  </script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        input {
+            padding: 6px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 60%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Cadastro de Usuário</h2>
+
+    <input type="text" id="nome" placeholder="Nome">
+    <input type="number" id="idade" placeholder="Idade">
+    <input type="email" id="email" placeholder="E-mail">
+    <button onclick="adicionarUsuario()">Cadastrar</button>
+
+    <script>
+        function adicionarUsuario() {
+            const nome = document.getElementById("nome").value.trim();
+            const idade = document.getElementById("idade").value.trim();
+            const email = document.getElementById("email").value.trim();
+
+            if (nome === "" || idade === "" || email === "") {
+                alert("Preencha todos os campos!");
+                return;
+            } else {alert("Parabéns você completou o formulário")}
+
+            const tabela = document.getElementById("tabelaUsuarios");
+
+            const novaLinha = tabela.insertRow();
+
+            novaLinha.insertCell(0).textContent = nome;
+            novaLinha.insertCell(1).textContent = idade;
+            novaLinha.insertCell(2).textContent = email;
+
+            // Limpar campos
+            document.getElementById("nome").value = "";
+            document.getElementById("idade").value = "";
+            document.getElementById("email").value = "";
+        }
+    </script>
+
+</body>
+</html>

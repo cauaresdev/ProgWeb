@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        input {
+            padding: 6px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 60%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Cadastro de Usuário</h2>
+
+    <input type="text" id="nome" placeholder="Nome">
+    <input type="number" id="idade" placeholder="Idade">
+    <input type="email" id="email" placeholder="E-mail">
+    <button onclick="adicionarUsuario()">Cadastrar</button>
+
+    <script>
+        function adicionarUsuario() {
+            const nome = document.getElementById("nome").value.trim();
+            const idade = document.getElementById("idade").value.trim();
+            const email = document.getElementById("email").value.trim();
+
+            if (nome === "" || idade === "" || email === "") {
+                alert("Preencha todos os campos!");
+                return;
+            } else {alert("Parabéns você completou o formulário")}
+
+            const tabela = document.getElementById("tabelaUsuarios");
+
+            const novaLinha = tabela.insertRow();
+
+            novaLinha.insertCell(0).textContent = nome;
+            novaLinha.insertCell(1).textContent = idade;
+            novaLinha.insertCell(2).textContent = email;
+
+            // Limpar campos
+            document.getElementById("nome").value = "";
+            document.getElementById("idade").value = "";
+            document.getElementById("email").value = "";
+        }
+    </script>
+
+</body>
+</html>

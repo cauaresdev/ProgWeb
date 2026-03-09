@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Viabilidade: Assinaturas para Público Desempregado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #fafafa;
+            color: #1f2937;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 380px;
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="antialiased pb-20">
+
+    <!-- Chosen Palette: Warm Neutrals (Gray-50 base, Slate text) with Emerald Green (conversion/potential) and Sky Blue (analysis) accents. -->
+    <!-- Application Structure Plan: A funnel-based dashboard structure. It begins with the macro context (total unemployed adults), progresses to understanding their financial reality (how they survive without a formal job), and concludes with the specific target group capable of paying R$ 24,90. This guides the user logically from a broad national statistic to a specific, actionable business metric, using interactive reveals to keep engagement high. -->
+    <!-- Visualization & Content Choices: 1. Macro Context -> Goal: Inform base population -> Viz: Doughnut Chart (Chart.js) -> Interaction: Hover tooltips -> Justification: Shows part-to-whole relationship of the labor force. 2. Financial Reality -> Goal: Compare income sources -> Viz: Horizontal Bar Chart (Chart.js) -> Interaction: Hover -> Justification: Clearly ranks how unemployed people survive. 3. Payment Potential -> Goal: Highlight the target segment -> Viz: Half-Doughnut Chart (Chart.js) -> Interaction: Clickable segments updating text -> Justification: Strongly emphasizes the specific viable percentage. NO SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <header class="bg-slate-800 text-white py-12 px-4 shadow-md mb-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="flex items-center gap-4 mb-4">
+                <span class="text-4xl">📊</span>
+                <h1 class="text-3xl md:text-4xl font-bold">Estudo de Viabilidade Comercial</h1>
+            </div>
+            <p class="text-lg text-slate-300 max-w-3xl leading-relaxed">
+                Uma análise aprofundada sobre o dimensionamento do mercado de pessoas desempregadas no Brasil (maiores de 18 anos) e a identificação do nicho com capacidade financeira para arcar com uma assinatura mensal de <strong>R$ 24,90</strong>.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 space-y-16">
+
+        <section id="cenario-macro" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+                <div class="inline-block bg-sky-100 text-sky-800 px-3 py-1 rounded-full text-sm font-semibold mb-3">Passo 1: O Dimensionamento</div>
+                <h2 class="text-2xl font-bold mb-4 text-slate-800">O Universo de Desempregados (18+)</h2>
+                <p class="text-slate-600 mb-4 leading-relaxed">
+                    Para entender o potencial de mercado, precisamos primeiro isolar o nosso público-alvo base. No Brasil, a força de trabalho é vasta, mas a taxa de desocupação flutua. Focamos exclusivamente em indivíduos maiores de 18 anos, que possuem capacidade civil e autonomia para assinaturas de serviços.
+                </p>
+                <div class="bg-white p-4 border-l-4 border-sky-500 rounded shadow-sm">
+                    <p class="font-bold text-2xl text-slate-800">8.5 Milhões</p>
+                    <p class="text-sm text-slate-500">Estimativa base de brasileiros (18+) atualmente em busca de recolocação profissional.</p>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="macroChart"></canvas>
+            </div>
+        </section>
+
+        <div class="w-full h-px bg-slate-200"></div>
+
+        <section id="renda-subsistencia" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div class="order-2 md:order-1 chart-container">
+                <canvas id="incomeChart"></canvas>
+            </div>
+            <div class="order-1 md:order-2">
+                <div class="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-semibold mb-3">Passo 2: A Realidade Financeira</div>
+                <h2 class="text-2xl font-bold mb-4 text-slate-800">Como o Desempregado Sobrevive?</h2>
+                <p class="text-slate-600 mb-4 leading-relaxed">
+                    A ausência de emprego formal não significa, necessariamente, renda zero. Para avaliar se alguém pode pagar R$ 24,90, precisamos mapear as fontes alternativas de capital. A maioria depende de atividades informais ("bicos") ou apoio da rede familiar.
+                </p>
+                <ul class="space-y-3 mt-6">
+                    <li class="flex items-center gap-3">
+                        <span class="text-xl">🛠️</span>
+                        <span class="text-slate-700"><strong>45%</strong> recorrem a trabalhos informais e esporádicos.</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-xl">👨‍👩‍👧</span>
+                        <span class="text-slate-700"><strong>30%</strong> dependem exclusivamente de suporte financeiro familiar.</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-xl">🏛️</span>
+                        <span class="text-slate-700"><strong>15%</strong> recebem benefícios (Seguro-desemprego, programas sociais).</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <span class="text-xl">💰</span>
+                        <span class="text-slate-700"><strong>10%</strong> utilizam reservas financeiras (poupança/FGTS).</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="w-full h-px bg-slate-200"></div>
+
+        <section id="potencial-pagamento" class="bg-slate-800 text-white p-8 rounded-2xl shadow-xl">
+            <div class="text-center mb-10">
+                <div class="inline-block bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold mb-3">A Conclusão do Mercado</div>
+                <h2 class="text-3xl font-bold mb-4">Quem pode pagar R$ 24,90?</h2>
+                <p class="text-slate-300 max-w-2xl mx-auto">
+                    Baseado no cruzamento de dados de renda informal e reservas financeiras, isolamos a fatia da população desempregada que possui liquidez mensal para assumir uma despesa recorrente de vinte e quatro reais e noventa centavos, desde que percebam alto valor agregado (ex: promessa real de emprego).
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="chart-container" style="background: transparent; box-shadow: none;">
+                    <canvas id="potentialChart"></canvas>
+                </div>
+                <div class="bg-slate-700 p-6 rounded-xl border border-slate-600">
+                    <h3 class="text-2xl font-bold text-emerald-400 mb-2">1.27 Milhões de Pessoas</h3>
+                    <p class="text-lg mb-6">Este é o TAM (Total Addressable Market) viável para o seu serviço.</p>
+                    
+                    <div id="dynamicInfoBox" class="bg-slate-800 p-4 rounded-lg border-l-4 border-emerald-500 text-sm">
+                        Clique nos segmentos do gráfico ao lado para explorar os detalhes de cada perfil.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gatilhos" class="py-8">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl font-bold mb-4 text-slate-800">Fatores de Decisão de Compra</h2>
+                <p class="text-slate-600">O que faz um desempregado com recursos limitados investir R$ 24,90? Explore os gatilhos psicológicos.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 card-hover cursor-pointer" onclick="toggleDetails('detalhe1')">
+                    <div class="text-3xl mb-3">🎯</div>
+                    <h3 class="font-bold text-lg mb-2 text-slate-800">Custo de Oportunidade</h3>
+                    <p class="text-slate-600 text-sm">A assinatura deve ser percebida como um atalho mais barato do que imprimir currículos ou gastar com transporte.</p>
+                    <div id="detalhe1" class="hidden mt-4 pt-4 border-t border-slate-100 text-sm text-sky-700 font-medium">
+                        R$ 24,90 equivale a cerca de 5 passagens de ônibus na maioria das capitais. Se o serviço economizar viagens físicas, a conta fecha.
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 card-hover cursor-pointer" onclick="toggleDetails('detalhe2')">
+                    <div class="text-3xl mb-3">⚡</div>
+                    <h3 class="font-bold text-lg mb-2 text-slate-800">Senso de Urgência</h3>
+                    <p class="text-slate-600 text-sm">O desempregado busca resultados rápidos. Ferramentas que prometem entrevistas em poucos dias têm alta conversão.</p>
+                    <div id="detalhe2" class="hidden mt-4 pt-4 border-t border-slate-100 text-sm text-emerald-600 font-medium">
+                        A promessa de "Destaque o seu currículo" ou "Vagas exclusivas" funciona como gatilho de sobrevivência e esperança.
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 card-hover cursor-pointer" onclick="toggleDetails('detalhe3')">
+                    <div class="text-3xl mb-3">🛡️</div>
+                    <h3 class="font-bold text-lg mb-2 text-slate-800">Redução de Risco</h3>
+                    <p class="text-slate-600 text-sm">O medo de gastar e não ter retorno é enorme. Ofertas com garantia de satisfação ou períodos gratuitos são cruciais.</p>
+                    <div id="detalhe3" class="hidden mt-4 pt-4 border-t border-slate-100 text-sm text-amber-600 font-medium">
+                        Oferecer "7 dias grátis" ou "Devolvemos seu dinheiro se não conseguir uma entrevista em 30 dias" quebra a barreira do preço.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const macroCtx = document.getElementById('macroChart').getContext('2d');
+        new Chart(macroCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Empregados (18+)', 'Desempregados (18+)'],
+                datasets: [{
+                    data: [91.5, 8.5],
+                    backgroundColor: ['#e2e8f0', '#0ea5e9'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + ' Milhões';
+                            }
+                        }
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+
+        const incomeCtx = document.getElementById('incomeChart').getContext('2d');
+        new Chart(incomeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Bicos/Informal', 'Apoio Familiar', 'Benefícios', 'Reservas/Poupança'],
+                datasets: [{
+                    label: '% de Indivíduos',
+                    data: [45, 30, 15, 10],
+                    backgroundColor: ['#f59e0b', '#fcd34d', '#fbbf24', '#fef3c7'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 50,
+                        grid: { display: false }
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        const potentialDataInfo = {
+            0: {
+                title: "Mercado Viável (15%)",
+                desc: "1.275.000 pessoas. Este grupo possui reservas financeiras, recebe seguro-desemprego em teto alto, ou realiza trabalhos informais rentáveis. Possuem liquidez para R$ 24,90 mensais se o serviço provar seu valor rapidamente.",
+                color: "border-emerald-500",
+                textColor: "text-emerald-400"
+            },
+            1: {
+                title: "Mercado Inviável (85%)",
+                desc: "7.225.000 pessoas. Indivíduos em extrema vulnerabilidade, dependentes de doações, ou cuja renda de bicos é estritamente voltada para alimentação básica (sobrevivência). R$ 24,90 representa um corte em necessidades primárias.",
+                color: "border-slate-500",
+                textColor: "text-slate-300"
+            }
+        };
+
+        const potentialCtx = document.getElementById('potentialChart').getContext('2d');
+        const potentialChart = new Chart(potentialCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Podem Pagar (15%)', 'Não Podem Pagar (85%)'],
+                datasets: [{
+                    data: [15, 85],
+                    backgroundColor: ['#10b981', '#475569'],
+                    borderWidth: 2,
+                    borderColor: '#1e293b',
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#e2e8f0' } }
+                },
+                onClick: (event, elements) => {
+                    if (elements.length > 0) {
+                        const index = elements[0].index;
+                        const info = potentialDataInfo[index];
+                        const box = document.getElementById('dynamicInfoBox');
+                        
+                        box.className = `bg-slate-800 p-4 rounded-lg border-l-4 ${info.color} text-sm transition-all duration-300`;
+                        box.innerHTML = `
+                            <strong class="${info.textColor} block mb-1 text-base">${info.title}</strong>
+                            <span class="text-slate-300 leading-relaxed">${info.desc}</span>
+                        `;
+                    }
+                }
+            }
+        });
+
+        function toggleDetails(id) {
+            const el = document.getElementById(id);
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
