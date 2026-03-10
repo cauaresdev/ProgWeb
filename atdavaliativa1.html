@@ -48,11 +48,24 @@
 
             usuarios.forEach((u, i) => {
                 div.innerHTML += `
-                    <div class="item">${u.nome}</div><div class="item">${u.endereco}</div>
-                    <div class="item">${u.telefone}</div><div class="item">${u.email}</div>
                     <div class="item">
-                        <button onclick="editar(${i})">Alterar</button>
-                        <button onclick="excluir(${i})">Excluir</button>
+                        ${u.nome}
+                    </div><div class="item">
+                        ${u.endereco}
+                    </div>
+                    <div class="item">
+                        ${u.telefone}
+                    </div>
+                    <div class="item">
+                        ${u.email}
+                    </div>
+                    <div class="item">
+                        <button onclick="editar(${i})">
+                            Alterar
+                        </button>
+                        <button onclick="excluir(${i})">
+                            Excluir
+                        </button>
                     </div>`;
             });
         };
