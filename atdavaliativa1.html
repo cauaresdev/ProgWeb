@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .grid-container 
+        {   
+            display: grid; 
+            grid-template-columns: 1fr 1fr 1fr 1fr 150px; 
+            gap: 5px; 
+            margin-top: 20px; 
+        }
+        .header { 
+
+            font-weight: bold; 
+            background: #eee; 
+            padding: 5px; }
+
+        .item { 
+
+            padding: 5px; 
+            border-bottom: 1px solid #ddd; 
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="text" id="nome" placeholder="Nome">
+        <input type="text" id="endereco" placeholder="Endereço">
+        <input type="text" id="telefone" placeholder="Telefone">
+        <input type="email" id="email" placeholder="E-mail">
+        <button onclick="salvar()">Salvar</button>
+    </div>
+
+    <div id="lista" class="grid-container"></div>
+
+    <script>
+        const usuarios = [];
+        let idEdicao = null;
+
+        const renderizar = () => {
+            const div = document.getElementById('lista');
+            div.innerHTML = `
+                <div class="header">Nome</div><div class="header">Endereço</div>
+                <div class="header">Telefone</div><div class="header">E-mail</div>
+                <div class="header">Ações</div>
+            `;
+
+            usuarios.forEach((u, i) => {
+                div.innerHTML += `
+                    <div class="item">${u.nome}</div><div class="item">${u.endereco}</div>
+                    <div class="item">${u.telefone}</div><div class="item">${u.email}</div>
+                    <div class="item">
+                        <button onclick="editar(${i})">Alterar</button>
+                        <button onclick="excluir(${i})">Excluir</button>
+                    </div>`;
+            });
+        };
+
+        const salvar = () => {
+            const nome = document.getElementById('nome');
+            const tel = document.getElementById('telefone');
+
+            if (!nome.value.trim() || !tel.value.trim()) {
+                alert("Nome e Telefone obrigatórios");
+                return;
+            }
+
+            if (idEdicao !== null) {
+                usuarios[idEdicao] = {
+                    nome: nome.value,
+                    endereco: document.getElementById('endereco').value,
+                    telefone: tel.value,
+                    email: document.getElementById('email').value
+                };
+                idEdicao = null;
+            } else {
+                usuarios.push({
+                    nome: nome.value,
+                    endereco: document.getElementById('endereco').value,
+                    telefone: tel.value,
+                    email: document.getElementById('email').value
+                });
+            }
+
+            nome.value = tel.value = document.getElementById('endereco').value = document.getElementById('email').value = "";
+            renderizar();
+        };
+
+        const excluir = (i) => {
+            usuarios.splice(i, 1);
+            renderizar();
+        };
+
+        const editar = (i) => {
+            document.getElementById('nome').value = usuarios[i].nome;
+            document.getElementById('endereco').value = usuarios[i].endereco;
+            document.getElementById('telefone').value = usuarios[i].telefone;
+            document.getElementById('email').value = usuarios[i].email;
+            idEdicao = i;
+        };
+
+        renderizar();
+    </script>
+</body>
+</html>

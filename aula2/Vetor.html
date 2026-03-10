@@ -9,11 +9,23 @@
     <h1>Atividade -  AULA 2 - Vetores</h1>
     <form>
         <div>
-        <h2>Insira Seus Dados</h2>
-        Nome:<input type="text" id="nome"></input>
-        Telefone: <input type="text" id="tel"> </input>
-        <button onclick= "incluir()">Inserir</button>
-        <div><button onclick="remover()">Remover</button></div>
+            <h2>
+                Insira Seus Dados
+            </h2>
+            Nome:
+            <input type="text" id="nome"></input>
+            Telefone: 
+            <input type="text" id="tel"></input>
+            Endereço: 
+            <input type="text" id="endereço"></input>
+            E-mail: 
+            <input type="text" id="endereço"></input>
+            <button onclick= "incluir()">
+                Inserir
+            </button>
+            <div>
+                <button onclick="remover()">Remover</button>
+            </div>
         </div>
     </form>
     <script>
@@ -28,6 +40,7 @@
            for (x in vetor) {
                alert("Nome: " + vetor[x].nome + " - Telefone: " + vetor[x].tel)
             }
+            
        }
 
 
@@ -40,7 +53,7 @@
             vetor.pop()
             alert("USUARIOS REMOVIDOS")
         }
-
+        console.log(vetor.nome)
        
     </script>
 </body>
